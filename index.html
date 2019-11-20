@@ -166,4 +166,108 @@ table#data-table td{
 }
 
 </style>
+
+
+<script>
+window.onload = function () {
+
+var options = {
+	title: {
+		text: "KDA Distribution"
+	},
+	subtitles: [{
+		text: ""
+	}],
+	animationEnabled: true,
+	data: [{
+		type: "pie",
+		startAngle: 40,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+			{ y: 70, label: "Mining" },
+			{ y: 20, label: "Platform" },
+			{ y: 4, label: "Investors" },
+			{ y: 2, label: "Community Support" },
+			{ y: 2, label: "Coinlist Listing" },
+			{ y: 2, label: "Strategic Allocation" }
+		]
+	}]
+};
+$("#chartContainer").CanvasJSChart(options);
+
+}
+</script>
+<body>
+
+
+
+<!-- Styles -->
+<style>
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chartdiv", am4charts.PieChart3D);
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+chart.legend = new am4charts.Legend();
+
+chart.data = [
+  {
+    name: "Miners",
+    percent: 70
+  },
+  {
+    name: "Investors",
+    percent: 4
+  },
+  {
+    name: "Community Support",
+    percent: 2
+  },
+  {
+    name: "Strategic Allocation",
+    percent: 2
+  },
+  {
+    name: "Platform",
+    percent: 20
+  },
+  {
+    name: "Coinlist Listing",
+    percent: 2
+  }
+];
+
+var series = chart.series.push(new am4charts.PieSeries3D());
+series.dataFields.value = "percent";
+series.dataFields.category = "name";
+
+}); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>
+
+</body>
 </html>
